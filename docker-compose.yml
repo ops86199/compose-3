@@ -15,7 +15,7 @@ services:
     ports:
       - "8082:8080"  # Assuming vprofile exposes 8080 internally
 
-petstor:
+  petstor:
    build:
      context: ./jpetstore-6
     container_name: petstor
