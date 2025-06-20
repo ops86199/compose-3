@@ -3,7 +3,7 @@ version: '3.8'
 services:
   calculator:
     build:
-      context: ./Calculator
+      context: ./calculator
     container_name: calculotr
     ports:
       - "8081:8080"
@@ -16,8 +16,8 @@ services:
       - "8082:8080"  # Assuming vprofile exposes 8080 internally
 
   petstore:
-   build:
-     context: ./jpetstore-6
+    build:
+     context: ./petstore
     container_name: petstor
     ports: 
-     - "8083:8080"
+      - "8083:8080"
