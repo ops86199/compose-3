@@ -20,4 +20,4 @@ services:
      context: ./petstore
     container_name: petstor
     ports: 
-      - "8083:8080"
+      - "8083:8080"      #  in petstore no need to give artifact name only pest ipadd and port no
