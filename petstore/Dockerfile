@@ -13,9 +13,25 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 #
+# Stage 1: Build the app using Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 
-FROM openjdk:17.0.2
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-RUN ./mvnw clean package
-CMD ./mvnw cargo:run -P tomcat90
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN mvn clean package -Dlicense.skip=true
+
+# Stage 2: Run the WAR on Tomcat
+FROM tomcat:9.0
+
+# Remove default apps
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copy WAR from builder stage
+COPY --from=builder /usr/src/app/target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+# Expose port 8080
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  calauloter:
+    build:
+      context: ./Calculoter
+    container_name: calculoter
+    ports:
+      - "8081:8080"
+
+  profile:
+    build:
+      context: ./profile
+    container_name: name
+    ports:
+      - "8082:8080"  # Assuming vprofile exposes 8080 internally
+
+  petstor:
+   build:
+     context: ./jpetstore-6
+    container_name: petstor
+    ports: 
+     - "8083:8080"
